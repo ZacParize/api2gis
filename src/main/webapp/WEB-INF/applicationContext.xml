@@ -1,0 +1,43 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+    <context:component-scan base-package="ru.dimall.*" />
+
+    <bean id="appData" class="ru.dimall.services.GisAppData">
+
+        <property name="protocol" value="http"/>
+
+        <property name="userAgent" value="Mozilla/5.0"/>
+
+        <property name="service" value="catalog.api.2gis.ru"/>
+
+        <property name="userKey" value="ruuxah6217"/>
+
+        <property name="searchingMethod" value="search"/>
+
+        <property name="ratingMethod" value="profile"/>
+
+    </bean>
+
+    <bean id="httpUrlConnection" class="ru.dimall.implementations.GisHttpUrlConnection" />
+
+    <bean id="gisDirectory" class="ru.dimall.implementations.GisDirectory" />
+
+    <bean id="gisFlamp" class="ru.dimall.implementations.GisFlamp" />
+
+    <bean id="gisService" class="ru.dimall.services.GisService" />
+
+    <mvc:resources mapping="/resources/**" location="/*" />
+
+    <mvc:annotation-driven/>
+
+</beans>
