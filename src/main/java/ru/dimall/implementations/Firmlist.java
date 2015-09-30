@@ -1,7 +1,6 @@
 package ru.dimall.implementations;
 
 import ru.dimall.interfaces.IFirmList;
-
 import java.io.Serializable;
 import java.util.*;
 
@@ -39,28 +38,20 @@ public class Firmlist implements IFirmList<Firmobject>, Serializable {
 
     /**
      *
-     */
-    @Override
-    public void sort() {
-        Collections.sort(this.getFirms(), new Comparator<Firmobject>() {
-            public int compare(Firmobject o1, Firmobject o2) {
-                if (o1.getRating() == o2.getRating())
-                    return 0;
-                else
-                    return o1.getRating() < o2.getRating() ? 1 : -1;
-            }
-        });
-    }
-
-    /**
-     *
      * @return
      */
     @Override
     public String toString() {
-        List<String> result = new ArrayList();
-        for (Firmobject firm: this.getFirms()) result.add(firm.toString());
-        return result.toString();
+        Set<Firmobject> set = new TreeSet(new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                String hash1 = String.valueOf(((Firmobject) o1).getRating()) + ((Firmobject) o1).getHash();
+                String hash2 = String.valueOf(((Firmobject) o2).getRating()) + ((Firmobject) o2).getHash();
+                return hash2.compareTo(hash1);
+            }
+        });
+        set.addAll(this.getFirms());
+        return set.toString();
     }
 
 }

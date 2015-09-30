@@ -12,6 +12,4 @@ public interface IFirmList<T> {
 
     void setFirms(List<T> firms);
 
-    void sort();
-
 }

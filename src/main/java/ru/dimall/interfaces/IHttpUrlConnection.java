@@ -29,16 +29,8 @@ public interface IHttpUrlConnection {
 
     void setParameters(String parameters);
 
-    /**
-     *
-     * @return
-     */
     String sendGet();
 
-    /**
-     *
-     * @return
-     */
     String sendPost();
 
 }

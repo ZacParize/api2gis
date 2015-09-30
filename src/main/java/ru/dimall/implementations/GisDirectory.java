@@ -14,6 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  *
@@ -70,10 +71,13 @@ public class GisDirectory implements IGisDirectory<Firmobject> {
 
                     JSONArray jsonFirms = (JSONArray) jsonObject.get("result");
 
-                    for (Object firm : jsonFirms) {
-                        JSONObject jsonFirm = (JSONObject) firm;
-                        result.getFirms().add(new Firmobject(Long.parseLong(jsonFirm.get("id").toString()), jsonFirm.get("name").toString(), jsonFirm.get("address").toString(), 0, jsonFirm.get("hash").toString()));
-                    }
+                    if (jsonFirms != null)
+
+                        for (Object firm : jsonFirms) {
+                            JSONObject jsonFirm = (JSONObject) firm;
+                            result.getFirms().add(new Firmobject(Long.parseLong((String)jsonFirm.get("id")),String.valueOf(jsonFirm.get("name")),String.valueOf(jsonFirm.get("address")), 0,String.valueOf(jsonFirm.get("hash"))));
+                        }
+
                 }
 
             } catch (ParseException e) {

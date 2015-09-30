@@ -18,7 +18,6 @@ public class GisService implements IGisService {
 
     private IGisFlamp gisFlamp;
 
-
     public IGisAppData getAppData() {
         return appData;
     }
@@ -71,8 +70,6 @@ public class GisService implements IGisService {
         this.getHttpUrlConnection().setServiceMethod(this.getAppData().getRatingMethod());
         this.getGisFlamp().setConnection(this.getHttpUrlConnection());
         this.getGisFlamp().fillRating(firms);
-        firms.sort();
-
         return firms.toString();
 
     }

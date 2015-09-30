@@ -82,7 +82,7 @@ public class GisFlamp implements IGisFlamp<Firmobject> {
 
             try {
                 Object object = parser.parse(jsonResponse);
-                return Integer.parseInt(((JSONObject) object).get("rating").toString());
+                return Integer.parseInt(String.valueOf(((JSONObject) object).get("rating")));
             } catch (ParseException e) {
                 return 0;
             }

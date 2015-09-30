@@ -1,9 +1,9 @@
-package ru.dimall.services;
+package ru.dimall.components;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import ru.dimall.interfaces.IGisAppData;
 
-@Service
+@Component
 public class GisAppData implements IGisAppData {
 
     private String protocol;
