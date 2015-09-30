@@ -14,6 +14,8 @@ import java.net.URLEncoder;
 
 /**
  *
+ * Kind of flamp
+ *
  * @author  franco
  * @see IGisFlamp
  * @see Firmobject

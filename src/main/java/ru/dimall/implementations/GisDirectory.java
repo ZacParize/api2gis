@@ -18,6 +18,8 @@ import java.util.Objects;
 
 /**
  *
+ * Kind of gis directory
+ *
  * @author  franco
  * @see IGisDirectory
  * @see Firmobject

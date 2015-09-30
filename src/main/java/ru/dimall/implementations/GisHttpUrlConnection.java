@@ -9,6 +9,8 @@ import java.net.*;
 
 /**
  *
+ * Realization of work over http
+ *
  * @author  franco
  * @see IHttpUrlConnection
  */
