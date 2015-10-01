@@ -1,8 +1,5 @@
 package ru.dimall.implementations;
 
-import ru.dimall.interfaces.IFirmList;
-import ru.dimall.interfaces.IGisDirectory;
-import ru.dimall.interfaces.IGisFlamp;
 import ru.dimall.interfaces.IHttpUrlConnection;
 import java.io.*;
 import java.net.*;
@@ -14,21 +11,15 @@ import java.net.*;
  * @author  franco
  * @see IHttpUrlConnection
  */
+
 public class GisHttpUrlConnection implements IHttpUrlConnection {
 
-    private String protocol = "http";
-    private String userAgent = "Mozilla/5.0";
-    private String service = "catalog.api.2gis.ru";
-    private String serviceMethod = "search";
-    private String userKey = "ruuxah6217";
-    private String parameters = "";
-    {
-        try {
-            parameters = "key=" + this.getUserKey() + "&version=1.3&what=" + URLEncoder.encode("пиво", "UTF-8") + "&where=" + URLEncoder.encode("Новосибирск", "UTF-8") + "&sort=name&page=1&pagesize=50&output=json";
-        } catch (UnsupportedEncodingException e) {
-            parameters = "";
-        }
-    }
+    private String protocol;
+    private String userAgent;
+    private String service;
+    private String serviceMethod;
+    private String userKey;
+    private String parameters;
 
     @Override
     public String getProtocol() {

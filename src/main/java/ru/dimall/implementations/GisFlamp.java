@@ -3,12 +3,10 @@ package ru.dimall.implementations;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import ru.dimall.implementations.Firmobject;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.dimall.interfaces.IFirmList;
-import ru.dimall.interfaces.IGisDirectory;
 import ru.dimall.interfaces.IGisFlamp;
 import ru.dimall.interfaces.IHttpUrlConnection;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -20,6 +18,7 @@ import java.net.URLEncoder;
  * @see IGisFlamp
  * @see Firmobject
  */
+
 public class GisFlamp implements IGisFlamp<Firmobject> {
 
     private IHttpUrlConnection connection;
@@ -37,6 +36,7 @@ public class GisFlamp implements IGisFlamp<Firmobject> {
      *
      * @param connection
      */
+    @Autowired
     @Override
     public void setConnection(IHttpUrlConnection connection) {
         this.connection = connection;

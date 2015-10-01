@@ -13,6 +13,7 @@ import java.io.Serializable;
 
 public class Firmobject implements Serializable {
 
+    private static final long serialVersionUID = 1000000000000000003L;
     private long id;
     private String name;
     private String address;

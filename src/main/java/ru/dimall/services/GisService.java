@@ -18,6 +18,7 @@ public class GisService implements IGisService {
 
     private IGisFlamp gisFlamp;
 
+
     public IGisAppData getAppData() {
         return appData;
     }
@@ -55,21 +56,15 @@ public class GisService implements IGisService {
     }
 
     @Override
-    public String getInfo(String industry, String city) {
+    public String getInfo(Map<String,String> requestParameters) {
 
-        this.getHttpUrlConnection().setProtocol(this.getAppData().getProtocol());
-        this.getHttpUrlConnection().setUserAgent(this.getAppData().getUserAgent());
-        this.getHttpUrlConnection().setService(this.getAppData().getService());
-        this.getHttpUrlConnection().setServiceMethod(this.getAppData().getSearchingMethod());
-        this.getHttpUrlConnection().setUserKey(this.getAppData().getUserKey());
+        this.getHttpUrlConnection().setServiceMethod(this.getAppData().getData().get("searchingMethod"));
         this.getGisDirectory().setConnection(this.getHttpUrlConnection());
-        Map<String,String> parameters = new HashMap();
-        parameters.put("industry", industry);
-        parameters.put("city", city);
-        IFirmList<Firmobject> firms = this.getGisDirectory().handle(parameters);
-        this.getHttpUrlConnection().setServiceMethod(this.getAppData().getRatingMethod());
+        IFirmList<Firmobject> firms = this.getGisDirectory().handle(requestParameters);
+        this.getHttpUrlConnection().setServiceMethod(this.getAppData().getData().get("ratingMethod"));
         this.getGisFlamp().setConnection(this.getHttpUrlConnection());
         this.getGisFlamp().fillRating(firms);
+
         return firms.toString();
 
     }

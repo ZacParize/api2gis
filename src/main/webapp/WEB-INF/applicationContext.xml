@@ -12,7 +12,33 @@
 
     <context:component-scan base-package="ru.dimall.*" />
 
+    <mvc:resources mapping="/resources/**" location="/*" />
+
+    <mvc:annotation-driven/>
+
+    <bean id="appDataMap" class="java.util.HashMap">
+
+        <constructor-arg>
+
+            <map key-type="java.lang.String" value-type="java.lang.String">
+
+                <entry key="searchingMethod" value="search" />
+
+                <entry key="ratingMethod" value="profile" />
+
+            </map>
+
+        </constructor-arg>
+
+    </bean>
+
     <bean id="appData" class="ru.dimall.components.GisAppData" >
+
+            <property name="data" ref="appDataMap" />
+
+    </bean>
+
+    <bean id="httpUrlConnection" class="ru.dimall.implementations.GisHttpUrlConnection" >
 
         <property name="protocol" value="http"/>
 
@@ -22,22 +48,12 @@
 
         <property name="userKey" value="ruuxah6217"/>
 
-        <property name="searchingMethod" value="search"/>
-
-        <property name="ratingMethod" value="profile"/>
-
     </bean>
 
-    <bean id="httpUrlConnection" class="ru.dimall.implementations.GisHttpUrlConnection" />
-
-    <bean id="gisDirectory" class="ru.dimall.implementations.GisDirectory" />
+    <bean id="gisDirectory" class="ru.dimall.implementations.GisDirectory"/>
 
     <bean id="gisFlamp" class="ru.dimall.implementations.GisFlamp" />
 
     <bean id="gisService" class="ru.dimall.services.GisService" />
-
-    <mvc:resources mapping="/resources/**" location="/*" />
-
-    <mvc:annotation-driven/>
 
 </beans>

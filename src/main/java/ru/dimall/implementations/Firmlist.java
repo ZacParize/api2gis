@@ -16,6 +16,7 @@ import java.util.*;
  */
 public class Firmlist implements IFirmList<Firmobject>, Serializable {
 
+    private static final long serialVersionUID = 1000000000000000008L;
     private List<Firmobject> firms = new ArrayList();
 
     /**
