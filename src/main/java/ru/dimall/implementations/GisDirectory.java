@@ -53,7 +53,7 @@ public class GisDirectory implements IGisDirectory<Firmobject> {
 
         IFirmList<Firmobject> result = new Firmlist();
 
-        if (this.getConnection() != null && parameters != null) {
+        if (this.getConnection() != null && parameters != null && parameters.get("industry") != null && parameters.get("city") != null && parameters.get("page") != null && parameters.get("pagesize") != null) {
 
             try {
 

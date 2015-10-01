@@ -50,7 +50,7 @@ public class GisFlamp implements IGisFlamp<Firmobject> {
     @Override
     public void fillRating(IFirmList<Firmobject> firms) {
 
-        if (firms != null && firms.getFirms() != null && this.getConnection() != null) {
+        if (firms != null && firms.getFirms() != null && firms.getFirms().size() > 0  && this.getConnection() != null) {
 
             for (Firmobject firm : firms.getFirms()) {
 
