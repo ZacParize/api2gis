@@ -54,6 +54,4 @@
 
     <bean id="gisFlamp" class="ru.dimall.implementations.GisFlamp" />
 
-    <bean id="gisService" class="ru.dimall.services.GisService" />
-
 </beans>
