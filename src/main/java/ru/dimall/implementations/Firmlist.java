@@ -46,8 +46,10 @@ public class Firmlist implements IFirmList<Firmobject>, Serializable {
         Set<Firmobject> set = new TreeSet(new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
-                String hash1 = String.valueOf(((Firmobject) o1).getRating()) + ((Firmobject) o1).getName() + ((Firmobject) o1).getHash();
-                String hash2 = String.valueOf(((Firmobject) o2).getRating()) + ((Firmobject) o2).getName() + ((Firmobject) o2).getHash();
+                Integer prefix1 = ((Firmobject) o2).getName().compareTo(((Firmobject) o1).getName());
+                Integer prefix2 = ((Firmobject) o1).getName().compareTo(((Firmobject) o2).getName());
+                String hash1 = String.valueOf(((Firmobject) o1).getRating()) + prefix1.toString() + ((Firmobject) o1).getHash();
+                String hash2 = String.valueOf(((Firmobject) o2).getRating()) + prefix2.toString() + ((Firmobject) o2).getHash();
                 return hash2.compareTo(hash1);
             }
         });
