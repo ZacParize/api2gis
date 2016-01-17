@@ -41,9 +41,8 @@ public class Firmlist implements IFirmList<Firmobject>, Serializable {
      *
      * @return
      */
-    @Override
-    public String toString() {
-        Set<Firmobject> set = new TreeSet(new Comparator() {
+    private Set<Firmobject> getSetInstance() {
+        return new TreeSet(new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
                 Integer prefix1 = ((Firmobject) o2).getName().compareTo(((Firmobject) o1).getName());
@@ -53,8 +52,44 @@ public class Firmlist implements IFirmList<Firmobject>, Serializable {
                 return hash2.compareTo(hash1);
             }
         });
+    }
+
+    /**
+     *
+     * @return
+     */
+    private Set<Firmobject> toSet() {
+        /*add a description*/
+        Set<Firmobject> set = this.getSetInstance();
         set.addAll(this.getFirms());
-        return set.toString();
+        return set;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return this.toSet().toString();
+    }
+
+    /**
+     *
+     * @param count
+     * @return
+     */
+    @Override
+    public String toString(int count) {
+        Set<Firmobject> oldSet = this.toSet();
+        Set<Firmobject> newSet = this.getSetInstance();
+        Iterator<Firmobject> iterator = oldSet.iterator();
+        int idx = 0;
+        while (iterator.hasNext() && idx < count) {
+            newSet.add(iterator.next());
+            idx++;
+        }
+        return newSet.toString();
     }
 
 }

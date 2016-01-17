@@ -17,7 +17,7 @@ public class Firmobject implements Serializable {
     private long id;
     private String name;
     private String address;
-    private int rating;
+    private double rating;
     private String hash;
 
     public Firmobject(long id,String name,String address,int rating,String hash) {
@@ -52,11 +52,11 @@ public class Firmobject implements Serializable {
         this.address = address;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

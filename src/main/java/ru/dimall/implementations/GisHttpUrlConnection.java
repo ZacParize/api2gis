@@ -6,13 +6,13 @@ import java.net.*;
 
 /**
  *
- * Realization of work over http
+ * Implementation of work over http
  *
  * @author  franco
  * @see IHttpUrlConnection
  */
 
-public class GisHttpUrlConnection implements IHttpUrlConnection {
+public class GisHttpUrlConnection implements IHttpUrlConnection, Cloneable {
 
     private String protocol;
     private String userAgent;
@@ -131,6 +131,19 @@ public class GisHttpUrlConnection implements IHttpUrlConnection {
     @Override
     public String sendPost() {
         return null;
+    }
+
+    /**
+     * Deep clone (all fields are immutable)
+     *
+     * @return
+     */
+    public IHttpUrlConnection clone() {
+        try {
+            return (IHttpUrlConnection) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
     }
 
 }

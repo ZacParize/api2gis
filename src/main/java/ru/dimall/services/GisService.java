@@ -1,13 +1,17 @@
 package ru.dimall.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import ru.dimall.implementations.Firmobject;
 import ru.dimall.interfaces.*;
-import java.util.HashMap;
+
+import java.util.List;
 import java.util.Map;
 
 @Service
+@Scope("prototype")
 public class GisService implements IGisService {
 
     private IGisAppData appData;
@@ -17,7 +21,6 @@ public class GisService implements IGisService {
     private IGisDirectory gisDirectory;
 
     private IGisFlamp gisFlamp;
-
 
     public IGisAppData getAppData() {
         return appData;
@@ -56,7 +59,7 @@ public class GisService implements IGisService {
     }
 
     @Override
-    public String getInfo(Map<String,String> requestParameters) {
+    public /*String*/IFirmList<?> getInfo(Map<String,String> requestParameters) {
 
         this.getHttpUrlConnection().setServiceMethod(this.getAppData().getData().get("searchingMethod"));
         this.getGisDirectory().setConnection(this.getHttpUrlConnection());
@@ -64,8 +67,9 @@ public class GisService implements IGisService {
         this.getHttpUrlConnection().setServiceMethod(this.getAppData().getData().get("ratingMethod"));
         this.getGisFlamp().setConnection(this.getHttpUrlConnection());
         this.getGisFlamp().fillRating(firms);
-
-        return firms.toString();
+        return firms;
+        //return firms.getFirms();
+        //return firms.toString();
 
     }
 

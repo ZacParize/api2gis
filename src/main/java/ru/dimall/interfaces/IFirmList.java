@@ -12,4 +12,6 @@ public interface IFirmList<T> {
 
     void setFirms(List<T> firms);
 
+    String toString(int count);
+
 }

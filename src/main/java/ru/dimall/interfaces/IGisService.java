@@ -4,6 +4,8 @@ import java.util.Map;
 
 public interface IGisService {
 
-    String getInfo(Map<String,String> requestParameters);
+    IGisAppData getAppData();
+
+    /*String*/IFirmList<?> getInfo(Map<String,String> requestParameters);
 
 }

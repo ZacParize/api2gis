@@ -57,7 +57,9 @@ public class GisDirectory implements IGisDirectory<Firmobject> {
 
             try {
 
-                this.getConnection().setParameters("key=" + this.getConnection().getUserKey() + "&version=1.3&what=" + URLEncoder.encode(parameters.get("industry"), "UTF-8") + "&where=" + URLEncoder.encode(parameters.get("city"), "UTF-8") + "&sort=name&page=" + URLEncoder.encode(parameters.get("page"), "UTF-8") + "&pagesize=" + URLEncoder.encode(parameters.get("pagesize"), "UTF-8") + "&output=json");
+                String city = parameters.get("city");
+
+                this.getConnection().setParameters("key=" + this.getConnection().getUserKey() + "&version=1.3&what=" + URLEncoder.encode(parameters.get("industry"), "UTF-8") + "&where=" + URLEncoder.encode(city, "UTF-8") + "&sort=name&page=" + URLEncoder.encode(parameters.get("page"), "UTF-8") + "&pagesize=" + URLEncoder.encode(parameters.get("pagesize"), "UTF-8") + "&output=json");
 
                 String jsonResponse = this.getConnection().sendGet();
 
@@ -75,7 +77,7 @@ public class GisDirectory implements IGisDirectory<Firmobject> {
 
                         for (Object firm : jsonFirms) {
                             JSONObject jsonFirm = (JSONObject) firm;
-                            result.getFirms().add(new Firmobject(Long.parseLong((String)jsonFirm.get("id")),String.valueOf(jsonFirm.get("name")),String.valueOf(jsonFirm.get("address")), 0,String.valueOf(jsonFirm.get("hash"))));
+                            result.getFirms().add(new Firmobject(Long.parseLong((String)jsonFirm.get("id")),String.valueOf(jsonFirm.get("name")),city.toUpperCase() + ", " + String.valueOf(jsonFirm.get("address")), 0,String.valueOf(jsonFirm.get("hash"))));
                         }
 
                 }
