@@ -18,6 +18,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * http request controller.
+ * Receive and perform request
+ */
 @Controller
 public class GisController {
 
@@ -47,40 +51,40 @@ public class GisController {
         private IGisService gisService;
 
         /**
-         *
-         * @return
+         * get reference on service
+         * @return reference on service
          */
         public IGisService getGisService() {
             return gisService;
         }
 
         /**
-         *
-         * @param gisService
+         * set reference on service
+         * @param gisService service
          */
         public void setGisService(IGisService gisService) {
             this.gisService = gisService;
         }
 
         /**
-         *
-         * @return
+         * get map of request parameters
+         * @return map of request parameters
          */
         public Map<String,String> getRequestParameters() {
             return this.requestParameters;
         }
 
         /**
-         *
-         * @param requestParameters
+         * set map of request parameters
+         * @param requestParameters map of request parameters
          */
         public void setRequestParameters(Map<String,String> requestParameters) {
             this.requestParameters = requestParameters;
         }
 
         /**
-         *
-         * @return
+         * get list of organizations
+         * @return list of organizations
          */
         public IFirmList getFirms() {
             return this.firms;
@@ -93,6 +97,11 @@ public class GisController {
 
     }
 
+    /**
+     * Execute information request
+     * @param requestParameters
+     * @return
+     */
     @RequestMapping(value = "/info", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     public @ResponseBody String getInfo(@RequestParam HashMap<String,String> requestParameters) {
 
@@ -126,4 +135,7 @@ public class GisController {
         return firms.toString(Integer.parseInt(requestParameters.get("pagesize")));
     }
 
+    private void test() {
+
+    }
 }

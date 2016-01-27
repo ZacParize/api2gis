@@ -5,10 +5,8 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- *
  * POJO
- * list of <Firmobject>
- *
+ * list of organizations
  * @author  franco
  * @see IFirmList
  * @see Firmobject
@@ -20,8 +18,8 @@ public class Firmlist implements IFirmList<Firmobject>, Serializable {
     private List<Firmobject> firms = new ArrayList();
 
     /**
-     *
-     * @return
+     * get list of organizations
+     * @return list of organizations
      */
     @Override
     public List<Firmobject> getFirms() {
@@ -29,8 +27,8 @@ public class Firmlist implements IFirmList<Firmobject>, Serializable {
     }
 
     /**
-     *
-     * @param firms
+     * set list of organizations
+     * @param firms list of organizations
      */
     @Override
     public void setFirms(List<Firmobject> firms) {
@@ -38,10 +36,11 @@ public class Firmlist implements IFirmList<Firmobject>, Serializable {
     }
 
     /**
-     *
-     * @return
+     * get ordered list of organizations
+     * @return set of organizations
      */
     private Set<Firmobject> getSetInstance() {
+        /*below is a object which always could help to order your list of firms by RATING AND AFTER ALL ALPHABET*/
         return new TreeSet(new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
@@ -55,8 +54,8 @@ public class Firmlist implements IFirmList<Firmobject>, Serializable {
     }
 
     /**
-     *
-     * @return
+     * Collaborate list to set
+     * @return set of organizations
      */
     private Set<Firmobject> toSet() {
         /*add a description*/
@@ -66,8 +65,8 @@ public class Firmlist implements IFirmList<Firmobject>, Serializable {
     }
 
     /**
-     *
-     * @return
+     * Object to string
+     * @return String
      */
     @Override
     public String toString() {
@@ -75,9 +74,9 @@ public class Firmlist implements IFirmList<Firmobject>, Serializable {
     }
 
     /**
-     *
+     * Object to string
      * @param count
-     * @return
+     * @return String
      */
     @Override
     public String toString(int count) {

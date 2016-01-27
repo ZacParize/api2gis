@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 /**
  *
  * Kind of flamp
- *
  * @author  franco
  * @see IGisFlamp
  * @see Firmobject
@@ -24,6 +23,9 @@ import java.util.concurrent.TimeUnit;
 
 public class GisFlamp implements IGisFlamp<Firmobject> {
 
+    /**
+     * Class for getting rating of organization
+     */
     private class Worker extends Thread {
 
         private Firmobject firm;
@@ -93,8 +95,8 @@ public class GisFlamp implements IGisFlamp<Firmobject> {
     private IHttpUrlConnection connection;
 
     /**
-     *
-     * @return
+     * get connection
+     * @return connection
      */
     @Override
     public IHttpUrlConnection getConnection() {
@@ -102,7 +104,7 @@ public class GisFlamp implements IGisFlamp<Firmobject> {
     }
 
     /**
-     *
+     * set connection
      * @param connection
      */
     @Autowired
@@ -112,9 +114,8 @@ public class GisFlamp implements IGisFlamp<Firmobject> {
     }
 
     /**
-     *
-     * @param firms
-     * @return
+     * fill rating for organization
+     * @param firms list of organizations
      */
     @Override
     public void fillRating(IFirmList<Firmobject> firms) {

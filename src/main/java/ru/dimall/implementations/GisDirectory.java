@@ -15,7 +15,6 @@ import java.util.Map;
 /**
  *
  * Kind of gis directory
- *
  * @author  franco
  * @see IGisDirectory
  * @see Firmobject
@@ -45,8 +44,8 @@ public class GisDirectory implements IGisDirectory<Firmobject> {
     }
 
     /**
-     *
-     * @return
+     * getting organization list from 2gis service
+     * @return list of organizations
      */
     @Override
     public IFirmList<Firmobject> handle(Map<String,String> parameters) {

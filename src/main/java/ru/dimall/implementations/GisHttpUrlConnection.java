@@ -82,8 +82,8 @@ public class GisHttpUrlConnection implements IHttpUrlConnection, Cloneable {
     }
 
     /**
-     *
-     * @return
+     * send get request
+     * @return String results
      */
     @Override
     public String sendGet() {
@@ -125,8 +125,8 @@ public class GisHttpUrlConnection implements IHttpUrlConnection, Cloneable {
     }
 
     /**
-     *
-     * @return
+     * send post request
+     * @return string result
      */
     @Override
     public String sendPost() {
@@ -135,8 +135,7 @@ public class GisHttpUrlConnection implements IHttpUrlConnection, Cloneable {
 
     /**
      * Deep clone (all fields are immutable)
-     *
-     * @return
+     * @return cloned connection
      */
     public IHttpUrlConnection clone() {
         try {

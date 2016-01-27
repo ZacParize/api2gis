@@ -5,12 +5,10 @@ import java.io.Serializable;
 /**
  *
  * POJO
- * consists information about company
- *
+ * store information about company
  * @author  franco
  * @see Serializable
  */
-
 public class Firmobject implements Serializable {
 
     private static final long serialVersionUID = 1000000000000000003L;
@@ -28,46 +26,90 @@ public class Firmobject implements Serializable {
         this.hash = hash;
     }
 
+    /**
+     * get id
+     * @return id
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * set id
+     * @param id
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     * get name
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * set name
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * get address
+     * @return address
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * set address
+     * @param address
+     */
     public void setAddress(String address) {
         this.address = address;
     }
 
+    /**
+     * get rating
+     * @return rating
+     */
     public double getRating() {
         return rating;
     }
 
+    /**
+     * set rating
+     * @param rating
+     */
     public void setRating(double rating) {
         this.rating = rating;
     }
 
+    /**
+     * get hash
+     * @return hash
+     */
     public String getHash() {
         return hash;
     }
 
+    /**
+     * set hash
+     * @param hash
+     */
     public void setHash(String hash) {
         this.hash = hash;
     }
 
+    /**
+     * Object to string
+     * @return
+     */
     @Override
     public String toString() {
         return "{\"name\":\"" + this.name + "\",\"address\":\"" + this.address + "\",\"rating\":\"" + String.valueOf(this.rating) + "\"}";
