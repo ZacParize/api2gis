@@ -1,7 +1,7 @@
 package ru.dimall.interfaces;
 
 /**
- *
+ * http connection functionality
  */
 public interface IHttpUrlConnection {
 
@@ -30,13 +30,13 @@ public interface IHttpUrlConnection {
     void setParameters(String parameters);
 
     /**
-     *
+     * implementation of get request
      * @return
      */
     String sendGet();
 
     /**
-     *
+     * implementation of post request
      * @return
      */
     String sendPost();

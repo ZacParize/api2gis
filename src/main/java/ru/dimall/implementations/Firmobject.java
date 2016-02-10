@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  *
  * POJO
- * store information about company
+ * store of information about company
  * @author  franco
  * @see Serializable
  */
@@ -108,7 +108,7 @@ public class Firmobject implements Serializable {
 
     /**
      * Object to string
-     * @return
+     * @return string view of the object
      */
     @Override
     public String toString() {

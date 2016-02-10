@@ -40,7 +40,7 @@ public class Firmlist implements IFirmList<Firmobject>, Serializable {
      * @return set of organizations
      */
     private Set<Firmobject> getSetInstance() {
-        /*below is a object which always could help to order your list of firms by RATING AND AFTER ALL ALPHABET*/
+        /*below is a object which always could help to order your list of firms by RATING AND AFTER ALL BY ALPHABET*/
         return new TreeSet(new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
@@ -66,7 +66,7 @@ public class Firmlist implements IFirmList<Firmobject>, Serializable {
 
     /**
      * Object to string
-     * @return String
+     * @return String view of object
      */
     @Override
     public String toString() {
@@ -76,7 +76,7 @@ public class Firmlist implements IFirmList<Firmobject>, Serializable {
     /**
      * Object to string
      * @param count
-     * @return String
+     * @return String view of object
      */
     @Override
     public String toString(int count) {

@@ -135,7 +135,4 @@ public class GisController {
         return firms.toString(Integer.parseInt(requestParameters.get("pagesize")));
     }
 
-    private void test() {
-
-    }
 }
