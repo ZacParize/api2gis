@@ -14,9 +14,7 @@ import ru.dimall.interfaces.*;
 import ru.dimall.services.GisService;
 
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * http request controller.
@@ -40,15 +38,20 @@ public class GisController {
     }
 
     /**
-     *
+     * Class for combining WHOLE info about company
      */
-    private class Worker extends Thread {
+    private class Worker implements Callable<IFirmList> {
 
         private IFirmList<?> firms;
 
         private Map<String,String> requestParameters;
 
         private IGisService gisService;
+
+        public Worker(Map<String,String> requestParameters,IGisService gisService) {
+            this.setRequestParameters(requestParameters);
+            this.setGisService(gisService);
+        }
 
         /**
          * get reference on service
@@ -91,8 +94,8 @@ public class GisController {
         }
 
         @Override
-        public void run() {
-            this.firms = this.getGisService().getInfo(this.getRequestParameters());
+        public IFirmList call() {
+            return this.getGisService().getInfo(this.getRequestParameters());
         }
 
     }
@@ -105,31 +108,30 @@ public class GisController {
     @RequestMapping(value = "/info", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     public @ResponseBody String getInfo(@RequestParam HashMap<String,String> requestParameters) {
 
-        List<Thread> threads = new ArrayList();
+        List<Future> threads = new ArrayList();
+        String[] cities = this.getGisService().getAppData().getData().get("cities").split(",");
+        ExecutorService executor = Executors.newFixedThreadPool(cities.length);
 
-        for (String city : this.getGisService().getAppData().getData().get("cities").split(",")) {
-
+        for (String city : cities) {
             Map<String,String> newRequestParameters = (HashMap)requestParameters.clone();
             newRequestParameters.put("city",city);
-            Worker worker = new Worker();
-            worker.setRequestParameters(newRequestParameters);
-            worker.setGisService((IGisService)context.getBean("gisService"));
-            threads.add(worker);
-            worker.start();
-            try {
-                worker.join();
-            } catch (InterruptedException e) {
-                threads.remove(worker);
-            }
+            Worker worker = new Worker(newRequestParameters,(IGisService)context.getBean("gisService"));
+            Future<IFirmList> future = executor.submit(worker);
+            threads.add(future);
         }
+        executor.shutdown();
 
         IFirmList firms = null;
         Iterator iterator = threads.iterator();
         while(iterator.hasNext()) {
-            if (firms == null)
-                firms = ((Worker) iterator.next()).getFirms();
-            else
-                firms.getFirms().addAll(((Worker) iterator.next()).getFirms().getFirms());
+            try {
+                if (firms == null)
+                    firms = (IFirmList)((Future) iterator.next()).get();
+                else
+                    firms.getFirms().addAll(((IFirmList)((Future) iterator.next()).get()).getFirms());
+            } catch (InterruptedException | ExecutionException e) {
+                return "[{}]";
+            }
         }
 
         return firms.toString(Integer.parseInt(requestParameters.get("pagesize")));

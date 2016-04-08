@@ -26,11 +26,16 @@ public class GisFlamp implements IGisFlamp<Firmobject> {
     /**
      * Class for getting rating of organization
      */
-    private class Worker extends Thread {
+    private class Worker implements Runnable {
 
         private Firmobject firm;
 
         private IHttpUrlConnection connection;
+
+        public Worker(Firmobject firm, IHttpUrlConnection connection) {
+            this.setFirm(firm);
+            this.setConnection(connection);
+        }
 
         public Firmobject getFirm() {
             return this.firm;
@@ -122,11 +127,7 @@ public class GisFlamp implements IGisFlamp<Firmobject> {
 
         if (firms != null && firms.getFirms() != null && firms.getFirms().size() > 0  && this.getConnection() != null) {
 
-            //ExecutorService executor = Executors.newFixedThreadPool(firms.getFirms().size());
-
-            for (Firmobject firm : firms.getFirms()) {
-
-                /*try {
+            /*try {
                     this.getConnection().setParameters("key=" + this.getConnection().getUserKey() + "&version=1.3&id=" + URLEncoder.encode(String.valueOf(firm.getId()), "UTF-8") + "&hash=" + URLEncoder.encode(firm.getHash(), "UTF-8") + "&output=json");
                     if (this.getConnection().getParameters() != null && this.getConnection().getParameters() != "") {
                         firm.setRating(this.getRatingFromResponse(this.getConnection().sendGet()));
@@ -136,6 +137,14 @@ public class GisFlamp implements IGisFlamp<Firmobject> {
                 } catch (Exception ex) {
                     firm.setRating(0);
                 }*/
+
+            ExecutorService executor = Executors.newFixedThreadPool(firms.getFirms().size());
+
+            for (Firmobject firm : firms.getFirms()) executor.execute(new Worker(firm,((GisHttpUrlConnection)this.getConnection()).clone()));
+            executor.shutdown();
+
+            /*for (Firmobject firm : firms.getFirms()) {
+
                 Worker worker = new Worker();
                 worker.setFirm(firm);
                 worker.setConnection(((GisHttpUrlConnection)this.getConnection()).clone());
@@ -145,11 +154,10 @@ public class GisFlamp implements IGisFlamp<Firmobject> {
                 } catch (InterruptedException e) {
                     firm.setRating(0.0);
                 }
-                //executor.execute(worker);
-            }
 
-            /*executor.shutdown();
-            try {
+            }*/
+
+            /*try {
                 executor.awaitTermination(10, TimeUnit.SECONDS);
             } catch (InterruptedException e) {
                 e.printStackTrace();
