@@ -111,7 +111,6 @@ public class GisController {
         List<Future> threads = new ArrayList();
         String[] cities = this.getGisService().getAppData().getData().get("cities").split(",");
         ExecutorService executor = Executors.newFixedThreadPool(cities.length);
-
         for (String city : cities) {
             Map<String,String> newRequestParameters = (HashMap)requestParameters.clone();
             newRequestParameters.put("city",city);
@@ -120,7 +119,6 @@ public class GisController {
             threads.add(future);
         }
         executor.shutdown();
-
         IFirmList firms = null;
         Iterator iterator = threads.iterator();
         while(iterator.hasNext()) {
@@ -133,7 +131,6 @@ public class GisController {
                 return "[{}]";
             }
         }
-
         return firms.toString(Integer.parseInt(requestParameters.get("pagesize")));
     }
 
